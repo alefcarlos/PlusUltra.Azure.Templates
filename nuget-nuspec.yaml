@@ -1,12 +1,13 @@
 parameters:
   nuspec: ''
+  version: '0.0.1'
 
 steps:
   - task: NuGetCommand@2
     displayName: 'Pack nuspec'
     inputs:
       command: 'pack'
-      buildProperties: 'version=$(GitVersion.NuGetVersionV2)'
+      buildProperties: 'version=${{ parameters.version }}'
       packagesToPack: ${{ parameters.nuspec }}
       versioningScheme: 'off'
 
@@ -26,7 +27,7 @@ steps:
       action: 'create'
       target: '$(Build.SourceVersion)'
       tagSource: 'userSpecifiedTag'
-      tag: '$(GitVersion.NuGetVersionV2)'
-      title: '$(GitVersion.NuGetVersionV2)'
+      tag: ${{ parameters.version }}
+      title: ${{ parameters.version }}
       changeLogCompareToRelease: 'lastFullRelease'
       changeLogType: 'commitBased'
