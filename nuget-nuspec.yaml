@@ -22,7 +22,7 @@ steps:
 
   - task: GitHubRelease@1
     inputs:
-      gitHubConnection: 'Github Commit'
+      gitHubConnection: 'Github'
       repositoryName: '$(Build.Repository.Name)'
       action: 'create'
       target: '$(Build.SourceVersion)'
