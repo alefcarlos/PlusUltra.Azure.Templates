@@ -1,9 +1,4 @@
-jobs:
-- job: Build
-  pool:
-    vmImage: vs2017-win2016
-
-  steps:
+steps:
   - task: GitVersion@5
     inputs:
       runtime: 'core'
