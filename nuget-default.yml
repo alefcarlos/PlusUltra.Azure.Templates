@@ -26,6 +26,7 @@ steps:
       versioningScheme: off
 
   - task: NuGetCommand@2
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
@@ -34,6 +35,7 @@ steps:
       verbosityPush: 'Normal'
 
   - task: GitHubRelease@1
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       gitHubConnection: 'Github'
       repositoryName: '$(Build.Repository.Name)'
