@@ -1,8 +1,12 @@
+parameters:
+  gitVersionFilePath: 'GitVersion.yml'
+
+
 steps:
   - task: GitVersion@5
     inputs:
       runtime: 'core'
-      configFilePath: 'GitVersion.yml'
+      configFilePath: ${{ parameters.gitVersionFilePath }}
       
   - script: echo %Action%%BuildVersion%
     displayName: 'Set build version'
